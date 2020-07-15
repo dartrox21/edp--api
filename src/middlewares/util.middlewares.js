@@ -14,7 +14,6 @@ const { userHasAuthority } = require('../utils/util.functions');
  */
 function cleanModel(model) {
     return (req, res, next) => {
-        console.log('in');
         req.body = pick(req.body, Object.keys(model));
         next();
     }
