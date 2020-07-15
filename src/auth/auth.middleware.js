@@ -22,7 +22,9 @@ let validateAuthUser = (req, res, next) => {
  * @throws CustomValidateException unaithorized if the token expired
  */
 let validateToken = (req, res, next) => {
+    console.log('Middleware: validate token');
     if(req._parsedUrl.pathname === '/auth/login') {
+        console.log('Auth/login not executing middleware');
         return next();
     }
     if (req.headers && req.headers.authorization) {
