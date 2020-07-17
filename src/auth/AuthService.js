@@ -23,7 +23,7 @@ class AuthService {
                 throw CustomValidateException.conflict().errorMessage(CustomErrorMessages.BAD_CREDENTIALS).build();
             } else {
                 res.setHeader('Authorization', `Bearer ${token}`);
-                res.status(HttpStatus.OK).send();
+                res.status(HttpStatus.OK).json(token)
             }
         });
     }
