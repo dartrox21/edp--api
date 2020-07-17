@@ -5,12 +5,15 @@ const bodyparser = require('body-parser');
 const routes = require('./routes');
 const errorMiddleware = require('./middlewares/error.middleware');
 const { validateToken } = require('./auth/auth.middleware');
+const cors = require('cors')
 
 app = express();
 
 app.use(bodyparser.urlencoded({extended : false}));
 
 app.use(bodyparser.json());
+
+app.use(cors())
 
 app.use(validateToken);
 
