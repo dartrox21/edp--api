@@ -14,6 +14,7 @@ const { userHasAuthority } = require('../utils/util.functions');
  */
 function cleanModel(model) {
     return (req, res, next) => {
+        console.log('Middleware: Clean Model');
         req.body = pick(req.body, Object.keys(model));
         next();
     }
@@ -27,6 +28,7 @@ function cleanModel(model) {
  */
 function preAuthorize(roles) {
     return function (req, res, next) {
+        console.log('Middleware: Pre Authorize');
         if (userHasAuthority(req.headers.decodedUser, roles)) {
             next();
         } else {
@@ -55,6 +57,7 @@ function preAuthorize(roles) {
  */
 function setFilters(projection) {
     return function (req, res, next) {
+        console.log('Middleware: Set filters');
         const limit = req.query.limit !== undefined ? Number(req.query.limit) : 10;
         req.query.limit = limit;
         let page = req.query.page !== undefined ? Number(req.query.page) - 1 : 0;

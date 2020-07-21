@@ -56,7 +56,7 @@ function asyncWrapper(callback) {
  * @param Array string of  roles 
  */
 function userHasAuthority(user, roles) {
-    return roles.includes(user.role.name);
+    return roles.includes(user.role);
 }
 
 /**

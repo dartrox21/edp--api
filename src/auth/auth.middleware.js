@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
  */
 let validateAuthUser = (req, res, next) => {
     const user = req.body;
+    console.log('Middleware: Validate auth user');
     if(!user.email || !user.password) {
         next(CustomValidateException.errorMessage(CustomErrorMessages.BAD_REQUEST).build());
     } else {
