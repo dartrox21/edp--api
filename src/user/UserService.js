@@ -137,7 +137,7 @@ class UserSevice extends GenericService {
     async findByEmail(email) {
         const user = await UserRepository.findByEmail(email);
         if(!user || !user.active) {
-            throw CustomValidateException.notFound().build();
+            throw CustomValidateException.notFound().errorMessage(CustomErrorMessages.USER_NOT_FOUND).build();
         }
         return user;
     }

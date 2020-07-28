@@ -22,13 +22,14 @@ module.exports = class CustomErrorMessages {
     static MUST_BE_UNIQUE = 'ERROR.COMMON.MUST_BE_UNIQUE';
     
     // Auth
-    static BAD_CREDENTIALS = 'ERROR.COMMON.AUTH.BAD_CREDENTIALS';
+    static BAD_CREDENTIALS = 'ERROR.AUTH.BAD_CREDENTIALS';
 
     // User
-    static EMAIL_ALREADY_USE = 'ERROR.COMMON.USER.EMAIL_ALREADY_IN_USE';
+    static EMAIL_ALREADY_USE = 'ERROR.USER.EMAIL_ALREADY_IN_USE';
+    static USER_NOT_FOUND = 'ERROR.USER.NOT_FOUND';
 
     // Role
-    static INVALID_ROLE = 'ERROR.COMMON.ROLE.INVALID_ROLE';
+    static INVALID_ROLE = 'ERROR.ROLE.INVALID_ROLE';
 
 
     CustomErrorMessages() {
