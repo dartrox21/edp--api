@@ -2,6 +2,7 @@ const CustomErrorMessages = require('../exceptionHandler/CustomErrorMessages');
 const HttpStatus = require('http-status-codes');
 
 module.exports = function errorMiddleware(error, req, res, next) {
+    console.log('Middleware: Error');
     const status = error.status || HttpStatus.INTERNAL_SERVER_ERROR;
     const message = error.message || CustomErrorMessages.UNDEFINED_ERROR;
     const field = error.field || '';
