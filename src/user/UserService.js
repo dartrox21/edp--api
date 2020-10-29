@@ -66,13 +66,8 @@ class UserSevice extends GenericService {
      * @returns 200 OK if the list is not empty.
      * @returns 204 NO CONTENT if the list is empty.
     */
-    async getAllPageable(req, res) {
-        const limit = req.query.limit;
-        const page = req.query.page;
-        const filters = req.query.filters;
-        const users =  await UserRepository.getAllPageable(limit, page, filters, userProjection);
-        const totalDocuments = await UserRepository.countDocuments();
-        super.getPageableResponse(res, users, page, limit, totalDocuments);
+    async getAllPageable(req, res, next) {
+        await super.getAllPageable(req, res, next, userProjection);
     }
 
     /**
