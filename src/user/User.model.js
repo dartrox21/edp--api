@@ -22,7 +22,7 @@ let User = new Schema({
     lastName: {
         type: String,
         required: [true, CustomErrorMessages.FIELD_MAY_NOT_BE_EMPTY]
-    }
+    },
     active: {
         type: Boolean,
         required: true,
