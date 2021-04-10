@@ -28,8 +28,8 @@ module.exports = class CustomErrorMessages {
     static EMAIL_ALREADY_USE = 'ERROR.USER.EMAIL_ALREADY_IN_USE';
     static USER_NOT_FOUND = 'ERROR.USER.NOT_FOUND';
 
-    // Role
-    static INVALID_ROLE = 'ERROR.ROLE.INVALID_ROLE';
+    // MONGOOSE
+    static MONGOOSE_ERROR = 'ERROR.MONGOOSE';
 
 
     CustomErrorMessages() {
