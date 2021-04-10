@@ -24,24 +24,23 @@ let validateAuthUser = (req, res, next) => {
  */
 let validateToken = (req, res, next) => {
     console.log('Middleware: validate token');
-    return next();
-    // if(req._parsedUrl.pathname === '/auth/login') {
-    //     console.log('Auth/login not executing middleware');
-    //     return next();
-    // }
-    // if (req.headers && req.headers.authorization) {
-    //     const token = req.headers.authorization.split(' ')[1];
-    //     jwt.verify(token, process.env.SECRET, (err, decoded) => { 
-    //         if(err) {
-    //             throw CustomValidateException.unauthorized().build();
-    //         } else {
-    //             req.headers.decodedUser = decoded;
-    //             next();
-    //         }
-    //     });
-    // } else {
-    //     next(CustomValidateException.unauthorized().build());
-    // }
+    if(req._parsedUrl.pathname === '/auth/login') {
+        console.log('Auth/login not executing middleware');
+        return next();
+    }
+    if (req.headers && req.headers.authorization) {
+        const token = req.headers.authorization.split(' ')[1];
+        jwt.verify(token, process.env.SECRET, (err, decoded) => { 
+            if(err) {
+                throw CustomValidateException.unauthorized().build();
+            } else {
+                req.headers.decodedUser = decoded;
+                next();
+            }
+        });
+    } else {
+        next(CustomValidateException.unauthorized().build());
+    }
 }
 
 module.exports = {
