@@ -113,7 +113,7 @@ class GenericService {
     }
 
     async getById(req, res) {
-        const object = await this.genericRepository.getById(req.params.id, userProjection);
+        const object = await this.genericRepository.getById(req.params.id);
         if (!object) {
             res.status(HttpStatus.NOT_FOUND).send();
         } else {

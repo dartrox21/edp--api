@@ -27,7 +27,8 @@ let User = new Schema({
         type: Boolean,
         required: true,
         default: true
-    }
+    },
+    metrics: [{ type: Schema.Types.ObjectId, ref: 'metric' }]
 }, 
 { 
     collection: 'user' 
@@ -45,17 +46,5 @@ User.pre('save', async function () {
     const hash = await encrypt(user.password);
     user.password = hash;
 });
-
-/*
-const autoPopulateRole = function(next) {
-    this.populate('role');
-    next();
-};
-
- Previous a findById & findByIdAndUpdate the role will be populated
-User.pre('find', autoPopulateRole)
-    .pre('findOne', autoPopulateRole)
-    .pre('findOneAndUpdate', autoPopulateRole);
-**/
 
 module.exports = mongoose.model('user', User);

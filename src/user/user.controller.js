@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const UserService = require('./UserService');
 const User = require('./User.model');
-const { cleanModel, setFilters, preAuthorize } = require('../middlewares/util.middlewares');
+const { cleanModel, setFilters } = require('../middlewares/util.middlewares');
 const { asyncWrapper } = require('../utils/util.functions');
 
 const cleanMiddleware = cleanModel(User.schema.paths);

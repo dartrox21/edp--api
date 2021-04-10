@@ -40,6 +40,7 @@ class UserSevice extends GenericService {
     */
     async create(req, res) {
         const user = req.body;
+        console.log(user)
         await this.uniqueValidateException(user);
         let userCreated = await UserRepository.save(user);
         userCreated = userCreated.toObject();
@@ -117,7 +118,7 @@ class UserSevice extends GenericService {
      * @returns User found
      * @throws CustomValidateException 404 NOT FOUND if the user is not found
      */
-    async findByIdAndValidate(id) {
+    async findByIdAndValidate(id, projection = null) {
         const user = await UserRepository.getById(id, userProjection);
         if(!user) {
             throw CustomValidateException.notFound().build();

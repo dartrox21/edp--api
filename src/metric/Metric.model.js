@@ -20,7 +20,15 @@ let Metric = new Schema({
         type: Schema.Types.Decimal128,
         required: [true, CustomErrorMessages.FIELD_MAY_NOT_BE_EMPTY]
     },
-    metrics_data: [{ type: Schema.Types.ObjectId, ref: 'metric_data' }]
+    metrics_data: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: 'metric_data' 
+    }],
+    user_id: {
+        type: Schema.Types.ObjectId,
+        required: [true, CustomErrorMessages.FIELD_MAY_NOT_BE_EMPTY],
+        ref: 'user'
+    },
 }, 
 { 
     collection: 'metric' 
@@ -39,7 +47,21 @@ const autoPopulatePhraseAndMetricsData = function(next) {
 
 // Previous a findById & findOne the phrase and metrics data will be populated
 Metric.pre('findById', autoPopulatePhraseAndMetricsData)
-    .pre('findOne', autoPopulatePhraseAndMetricsData);;
+    .pre('findOne', autoPopulatePhraseAndMetricsData);
 
+/**
+ * Cast the general average to float this to avoid the following response:
+ * BEFORE
+ * "general_average": {"$numberDecimal": "83.322"}
+ * NOW
+ * "general_average": 83.322
+ * 
+ */
+Metric.set('toJSON', {
+  transform: (doc, ret) => {
+    ret.general_average = parseFloat(ret.general_average);
+    return ret;
+  },
+});
 
 module.exports = mongoose.model('metric', Metric);
