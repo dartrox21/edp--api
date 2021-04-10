@@ -32,7 +32,7 @@ class AuthService {
     }
 
     async logout(req, res, next) {
-      TokenService.save(req, res, next);
+      await TokenService.save(req, res, next);
     }
 }
 
