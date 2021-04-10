@@ -40,7 +40,6 @@ class UserSevice extends GenericService {
     */
     async create(req, res) {
         const user = req.body;
-        console.log(user)
         await this.uniqueValidateException(user);
         let userCreated = await UserRepository.save(user);
         userCreated = userCreated.toObject();

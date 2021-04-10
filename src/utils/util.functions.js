@@ -76,7 +76,6 @@ async function encrypt(password) {
  */
 function handleMongooseError(error) {
     console.log('Handle Mongoose Error')
-    console.log(error)
     const field = error.stringValue ;
     const props = error.path;
     return CustomValidateException.status(HttpStatus.BAD_REQUEST)
