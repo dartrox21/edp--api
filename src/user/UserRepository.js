@@ -14,8 +14,8 @@ class UserRepository extends GenericRepository {
      * Method to find a user by email
      * @param Email email 
      */
-    async findByEmail(email) {
-        return User.findOne({email: email});
+    async findByEmail(email, projection) {
+        return User.findOne({email: email}, projection);
     }
 
     /**
