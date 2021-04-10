@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const MetricService = require('./MetricService');
 const Metric = require('./Metric.model');
-const { cleanModel, setFilters } = require('../middlewares/util.middlewares');
+const { setFilters } = require('../middlewares/util.middlewares');
 const { asyncWrapper } = require('../utils/util.functions');
-const cleanMiddleware = cleanModel(Metric.schema.paths);
 const FILTERS = ['date', 'phrase', 'general_average'];
 
 router.get('/metric/:id',
