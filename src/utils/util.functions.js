@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const CustomValidateException = require('../exceptionHandler/CustomValidateException');
+const CustomErrorMessages = require('../exceptionHandler/CustomErrorMessages');
 const HttpStatus = require('http-status-codes');
 const mongoose = require('mongoose');
 
@@ -74,9 +75,13 @@ async function encrypt(password) {
  * @param error Mongoose Error
  */
 function handleMongooseError(error) {
-    const field = Object.keys(error.errors)[0];
-    const props = error.errors[field].properties;
-    return CustomValidateException.status(HttpStatus.BAD_REQUEST).setField(props.path).setValue(props.value).errorMessage(props.message).build();
+    console.log('Handle Mongoose Error')
+    const field = error.stringValue ;
+    const props = error.path;
+    return CustomValidateException.status(HttpStatus.BAD_REQUEST)
+      .setField(props)
+      .setValue(field)
+      .errorMessage(CustomErrorMessages.MONGOOSE_ERROR).build();
 };
 
 /**

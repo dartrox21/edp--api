@@ -94,7 +94,7 @@ class UserSevice extends GenericService {
      * @returns User found
      * @throws CustomValidateException 404 NOT FOUND if the user is not found
      */
-    async findByIdAndValidate(id) {
+    async findByIdAndValidate(id, projection = null) {
         const user = await UserRepository.getById(id, userProjection);
         if(!user) {
             throw CustomValidateException.notFound().build();
