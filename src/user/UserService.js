@@ -5,6 +5,7 @@ const HttpStatus = require('http-status-codes');
 const UserRepository = require('./UserRepository');
 const User = require('./User.model');
 const userProjection = require('./projections/user.projection');
+const userLoginProjection = require('./projections/userLogin.projection');
 
 class UserSevice extends GenericService {
     constructor() {
@@ -130,7 +131,7 @@ class UserSevice extends GenericService {
      * @param email 
      */
     async findByEmail(email) {
-        const user = await UserRepository.findByEmail(email);
+        const user = await UserRepository.findByEmail(email, userLoginProjection);
         if(!user || !user.active) {
             throw CustomValidateException.notFound().errorMessage(CustomErrorMessages.USER_NOT_FOUND).build();
         }
