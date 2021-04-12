@@ -1,6 +1,7 @@
 const CustomValidateException = require('../exceptionHandler/CustomValidateException');
 const CustomErrorMessages = require('../exceptionHandler/CustomErrorMessages');
 const jwt = require('jsonwebtoken');
+const TokenService = require('./token/TokenService');
 
 /**
  * Middleware to validate that the body contains a user and a password
@@ -34,8 +35,14 @@ let validateToken = (req, res, next) => {
             if(err) {
                 throw CustomValidateException.unauthorized().build();
             } else {
-                req.headers.decodedUser = decoded;
-                next();
+                TokenService.findOne(req, res, next).then(token => {
+                  if(token == null) {
+                    req.headers.decodedUser = decoded;
+                    next();
+                  } else {
+                    next(CustomValidateException.unauthorized().build());
+                  }
+                }).catch(() => next(CustomValidateException.status(500).build()));
             }
         });
     } else {

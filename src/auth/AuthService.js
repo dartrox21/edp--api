@@ -4,6 +4,7 @@ const CustomValidateException = require('../exceptionHandler/CustomValidateExcep
 const CustomErrorMessages = require('../exceptionHandler/CustomErrorMessages');
 const UserService = require('../user/UserService');
 const bcrypt = require('bcrypt');
+const TokenService = require('./token/TokenService')
 
 class AuthService {
     constructor() { 
@@ -28,6 +29,10 @@ class AuthService {
                 res.status(HttpStatus.OK).json({user, token});
             }
         });
+    }
+
+    async logout(req, res, next) {
+      await TokenService.save(req, res, next);
     }
 }
 
