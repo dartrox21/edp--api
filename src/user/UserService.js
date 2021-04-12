@@ -5,13 +5,13 @@ const HttpStatus = require('http-status-codes');
 const UserRepository = require('./UserRepository');
 const User = require('./User.model');
 const userProjection = require('./projections/user.projection');
+const userLoginProjection = require('./projections/userLogin.projection');
 
 class UserSevice extends GenericService {
     constructor() {
         super(User);
         this.create = this.create.bind(this);
         this.uniqueValidateException = this.uniqueValidateException.bind(this);
-        this.getAll = this.getAll.bind(this);
         this.getById = this.getById.bind(this);
         this.delete = this.delete.bind(this);
         this.findByIdAndValidate = this.findByIdAndValidate.bind(this);
@@ -45,29 +45,6 @@ class UserSevice extends GenericService {
         userCreated = userCreated.toObject();
         delete userCreated.password;
         res.status(HttpStatus.CREATED).json(userCreated);
-    }
-    
-    /**
-     * Service to get the list of all the users with the user projection
-     * @param req Request object
-     * @param res Response object
-     * @returns 200 OK if the list is not empty.
-     * @returns 204 NO CONTENT if the list is empty.
-    */ 
-    async getAll(req, res) {
-        const users = await UserRepository.getAll(req.query.filters, userProjection);
-        super.getListResponse(res, users);
-    }
-    
-    /**
-     * Service to get the pageable list of all the users with the user projection
-     * @param req Request object
-     * @param res Response object
-     * @returns 200 OK if the list is not empty.
-     * @returns 204 NO CONTENT if the list is empty.
-    */
-    async getAllPageable(req, res, next) {
-        await super.getAllPageable(req, res, next, userProjection);
     }
 
     /**
@@ -130,7 +107,7 @@ class UserSevice extends GenericService {
      * @param email 
      */
     async findByEmail(email) {
-        const user = await UserRepository.findByEmail(email);
+        const user = await UserRepository.findByEmail(email, userLoginProjection);
         if(!user || !user.active) {
             throw CustomValidateException.notFound().errorMessage(CustomErrorMessages.USER_NOT_FOUND).build();
         }
