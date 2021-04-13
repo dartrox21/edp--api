@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { validateAuthUser } = require('./auth.middleware');
-const AuthService = require('./AuthService');
+const AuthService = require('./auth.service');
 const { asyncWrapper } = require('../utils/util.functions');
 
 router.post('/auth/login', validateAuthUser, asyncWrapper(AuthService.login));

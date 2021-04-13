@@ -1,7 +1,7 @@
 const GenericService = require('../generics/GenericService');
 const Metric = require('./Metric.model');
 const metricProjection = require('./projections/metric.projection');
-const UserService = require('../user/UserService');
+const UserService = require('../user/user.service');
 
 class MetricSevice extends GenericService {
 

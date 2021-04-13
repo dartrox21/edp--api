@@ -1,5 +1,5 @@
 
-const TokenRepository = require('./TokenRepository');
+const TokenRepository = require('./token.repository');
 const Token = require('./Token.model')
 const HttpStatus = require('http-status-codes');
 

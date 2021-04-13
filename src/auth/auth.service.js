@@ -2,9 +2,9 @@ const jwt = require('jsonwebtoken');
 const HttpStatus = require('http-status-codes');
 const CustomValidateException = require('../exceptionHandler/CustomValidateException');
 const CustomErrorMessages = require('../exceptionHandler/CustomErrorMessages');
-const UserService = require('../user/UserService');
+const UserService = require('../user/user.service');
 const bcrypt = require('bcrypt');
-const TokenService = require('./token/TokenService')
+const TokenService = require('./token/token.service')
 
 class AuthService {
     constructor() { 

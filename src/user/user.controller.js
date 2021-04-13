@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const UserService = require('./UserService');
+const UserService = require('./user.service');
 const User = require('./User.model');
 const { cleanModel } = require('../middlewares/util.middlewares');
 const { asyncWrapper } = require('../utils/util.functions');
