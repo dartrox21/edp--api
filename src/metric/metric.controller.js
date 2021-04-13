@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const MetricService = require('./MetricService');
+const MetricService = require('./metric.service');
 const Metric = require('./Metric.model');
 const { setFilters } = require('../middlewares/util.middlewares');
 const { asyncWrapper } = require('../utils/util.functions');

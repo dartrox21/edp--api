@@ -1,7 +1,7 @@
 const CustomValidateException = require('../exceptionHandler/CustomValidateException');
 const CustomErrorMessages = require('../exceptionHandler/CustomErrorMessages');
 const jwt = require('jsonwebtoken');
-const TokenService = require('./token/TokenService');
+const TokenService = require('./token/token.service');
 
 /**
  * Middleware to validate that the body contains a user and a password
