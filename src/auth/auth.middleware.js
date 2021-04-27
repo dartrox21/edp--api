@@ -25,7 +25,7 @@ let validateAuthUser = (req, res, next) => {
  */
 let validateToken = (req, res, next) => {
     console.log('Middleware: validate token');
-    if(req._parsedUrl.pathname === '/auth/login') {
+    if(req._parsedUrl.pathname === '/auth/login' || req._parsedUrl.pathname === '/user') {
         console.log('Auth/login not executing middleware');
         return next();
     }
