@@ -44,10 +44,15 @@ const autoPopulatePhraseAndMetricsData = function(next) {
     next();
 };
 
+const autoPopulatePhrase = function(next) {
+    this.populate('phrase');
+    next();
+};
 
 // Previous a findById & findOne the phrase and metrics data will be populated
 Metric.pre('findById', autoPopulatePhraseAndMetricsData)
-    .pre('findOne', autoPopulatePhraseAndMetricsData);
+    .pre('findOne', autoPopulatePhraseAndMetricsData)
+    .pre('find', autoPopulatePhrase);
 
 /**
  * Cast the general average to float this to avoid the following response:
