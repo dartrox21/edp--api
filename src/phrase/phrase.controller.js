@@ -8,7 +8,7 @@ const FILTERS = ['id', 'data'];
 router.get('/phrase/:id',
     asyncWrapper(PhraseService.getById));
 
-router.get('/phrase/:id',
+router.get('/phrase/all',
     [setFilters(FILTERS)],
     asyncWrapper(PhraseService.getAll));
 
