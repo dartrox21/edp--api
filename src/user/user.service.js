@@ -24,6 +24,7 @@ class UserSevice extends GenericService {
      * @throws CustomValidateException if the user with the email exists
     */ 
     async uniqueValidateException(user) {
+        console.log('uniqueValidateException UserSevice');
         let found = await UserRepository.findByEmail(user.email);
         if(found !== null) {
             throw CustomValidateException.conflict().errorMessage(CustomErrorMessages.EMAIL_ALREADY_USE).build();
@@ -39,6 +40,7 @@ class UserSevice extends GenericService {
      * @returns Response 201 CREATED with the user created
     */
     async create(req, res) {
+        console.log('create UserSevice');
         const user = req.body;
         await this.uniqueValidateException(user);
         let userCreated = await UserRepository.save(user);
@@ -55,6 +57,7 @@ class UserSevice extends GenericService {
      * @returns 200 OK If the user is found
      */
     async getById(req, res) {
+        console.log('getById UserSevice');
         const user = await this.findByIdAndValidate(req.params.id);
         res.status(HttpStatus.OK).json(user);
     }
@@ -67,6 +70,7 @@ class UserSevice extends GenericService {
      * @returns 200 OK If the user is deleted successfully
      */
     async delete(req, res) {
+        console.log('delete UserSevice');
         await this.findByIdAndValidate(req.params.id);
         await UserRepository.delete(req.params.id);
         res.status(HttpStatus.OK).send();
@@ -81,6 +85,7 @@ class UserSevice extends GenericService {
      * @returns 200 OK If the user is updated successfully
      */
     async update(req, res) {
+        console.log('update UserSevice');
         const id = req.params.id;
         await this.findByIdAndValidate(id);
         const user = await UserRepository.update(id, req.body, userProjection);
@@ -95,6 +100,7 @@ class UserSevice extends GenericService {
      * @throws CustomValidateException 404 NOT FOUND if the user is not found
      */
     async findByIdAndValidate(id, projection = null) {
+        console.log('findByIdAndValidate UserSevice');
         const user = await UserRepository.getById(id, userProjection);
         if(!user) {
             throw CustomValidateException.notFound().build();
@@ -107,6 +113,7 @@ class UserSevice extends GenericService {
      * @param email 
      */
     async findByEmail(email) {
+        console.log('findByEmail UserSevice');
         const user = await UserRepository.findByEmail(email, userLoginProjection);
         if(!user || !user.active) {
             throw CustomValidateException.notFound().errorMessage(CustomErrorMessages.USER_NOT_FOUND).build();

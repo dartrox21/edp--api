@@ -12,6 +12,7 @@ class AuthService {
      }
 
     async login(req, res, next) {
+        console.log('login AuthSevice');
         const userLogin = req.body;
         let user = await UserService.findByEmail(req.body.email);
         const hasValidCredentials = await bcrypt.compare(userLogin.password, user.password);
@@ -32,6 +33,7 @@ class AuthService {
     }
 
     async logout(req, res, next) {
+      console.log('logout AuthSevice');
       await TokenService.save(req, res, next);
     }
 }

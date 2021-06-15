@@ -21,6 +21,7 @@ class MetricSevice extends GenericService {
      * @returns 204 NO CONTENT if the list is empty.
     */
     async getAllPageable(req, res, next) {
+        console.log('getAllPageable MetricSevice');
         const userId = req.params.userId;
         await UserService.findByIdAndValidate(userId);
         req.query.filters['user_id'] = userId;
