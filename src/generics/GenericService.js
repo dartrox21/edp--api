@@ -34,6 +34,7 @@ class GenericService {
      * @param res Response object
      */
     async create(req, res) {
+        console.log('Create generic');
         const object = req.body;
         await this.uniqueValidateException(object);
         res.status(HttpStatus.CREATED).json(await this.genericRepository.save(object));
@@ -48,6 +49,8 @@ class GenericService {
      * @returns 204 NO CONTENT if the list is empty.
      */
     async getAll(req, res, next, projection = null) {
+        console.log('getAll generic');
+        console.log(req.query.filters);
         const objectList = await this.genericRepository.getAll(req.query.filters, projection);
         this.getListResponse(res, objectList);
     }
@@ -62,6 +65,7 @@ class GenericService {
      * @returns 204 NO CONTENT if the list is empty.
      */
     async getAllPageable(req, res, next, projection = null) {
+        console.log('getAllPageable generic');
         const limit = req.query.limit;
         const page = req.query.page;
         const filters = req.query.filters;
@@ -71,10 +75,12 @@ class GenericService {
     }
 
     async delete(req, res) {
+        console.log('delete generic');
         res.json('delete generic');
     }
 
     async update(req, res) {
+        console.log('update generic');
         res.json('update generic');
     }
 
@@ -86,6 +92,7 @@ class GenericService {
      * @returns 204 NO CONTENT if the list is empty
      */
     async getListResponse(res, objectList) {
+        console.log('getListResponse generic');
         if (objectList.length > 0) {
             res.status(HttpStatus.OK).json(objectList);
         } else {
@@ -105,6 +112,7 @@ class GenericService {
      * @returns 204 NO CONTENT if the list is empty
      */
     async getPageableResponse(res, objectList, page, limit, totalDocuments) {
+        console.log('getPageableResponse generic');
         if (objectList.length > 0) {
             res.status(HttpStatus.OK).json(await buildPageableResponse(objectList, page, limit, totalDocuments));
         } else {
@@ -113,6 +121,7 @@ class GenericService {
     }
 
     async getById(req, res) {
+        console.log('getById generic');
         const object = await this.genericRepository.getById(req.params.id);
         if (!object) {
             res.status(HttpStatus.NOT_FOUND).send();

@@ -9,7 +9,6 @@ router.get('/phrase/:id',
     asyncWrapper(PhraseService.getById));
 
 router.get('/phrase/all',
-    [setFilters(FILTERS)],
     asyncWrapper(PhraseService.getAll));
 
 module.exports = router;
