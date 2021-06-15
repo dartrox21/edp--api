@@ -50,7 +50,8 @@ class GenericService {
      */
     async getAll(req, res, next, projection = null) {
         console.log('getAll generic');
-        console.log(req.query.filters);
+        console.log(`filters: ${req.query.filters}`);
+        console.log(`projection: ${projection}`);
         const objectList = await this.genericRepository.getAll(req.query.filters, projection);
         this.getListResponse(res, objectList);
     }

@@ -5,10 +5,8 @@ const { setFilters } = require('../middlewares/util.middlewares');
 const { asyncWrapper } = require('../utils/util.functions');
 const FILTERS = ['id', 'data'];
 
-router.get('/phrase/:id',
-    asyncWrapper(PhraseService.getById));
-
 router.get('/phrase/all',
+    [setFilters(FILTERS)],
     asyncWrapper(PhraseService.getAll));
 
 module.exports = router;
